@@ -7,12 +7,15 @@ ui <- fluidPage(
   titlePanel("Relevamiento Precios Claros"),
   sidebarLayout(
     sidebarPanel(
+      fluidRow(h4("Descargar Datos:")),
       fluidRow(
-        downloadButton("descargarLista", "Descargar Datos Crudos")
+        downloadButton("descargarLista", "Datos Crudos")
     ),
       fluidRow(
-        downloadButton("descargarTabla", "Descargar Tabla Comparativa")
+        downloadButton("descargarTabla", "Tabla Comparativa")
     ),
+    br(),
+    em("Creado por @pdelboca y Open Data Córdoba."),
     width = 2
     ),
     mainPanel(
@@ -36,7 +39,7 @@ server <- function(input, output) {
         fecha = as.character(fecha)
       ) %>%
       spread(nombre_sucursal, precio_lista, fill = 0)
-  })
+  }, striped = TRUE,bordered = TRUE, spacing = "xs")
   
   output$descargarLista <- downloadHandler(
     filename = function() {
